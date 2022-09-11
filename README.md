@@ -2,7 +2,7 @@
 
 C code implementation of splitting or merging algorithms for determining the number of clusters.
 
-It is intended to be called in the R language.
+It is intended to be called in the R language for research purposes.
 
 # Requirement
 
