@@ -6,6 +6,7 @@ It is intended to be called in the R language for research purposes.
 
 # Requirements
 
+- `diptest` package (for dipmeans)
 - `mclust` package (for em-based method)
 - `kohonen` package (for smlsom)
 - `gtools` package (for smlsom)
