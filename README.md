@@ -4,13 +4,14 @@ C code implementation of splitting or merging algorithms for determining the num
 
 It is intended to be called in the R language for research purposes.
 
-# Requirement
+# Requirements
 
+- `diptest` package (for dipmeans)
 - `mclust` package (for em-based method)
 - `kohonen` package (for smlsom)
 - `gtools` package (for smlsom)
 
-# Direcotries
+# Directories
 - `src` directory contains three directories:
   - `smlsom`
   - `two_means`
