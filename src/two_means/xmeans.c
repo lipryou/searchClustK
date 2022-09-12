@@ -145,7 +145,9 @@ double loglik(int n, int p, int k, double sigma)
 boolean testCluster_bic(double *X, int p, int *ck, int nk, double *mk, double *vec1, double *vec2, list ic1, list ic2, double *bic_p, double *bic_c)
 // bic_p, bic_c: BIC of a parent, children respectively
 {
-  //
+  if (nk <= 5)
+    return false;
+
   int n1, n2;
   double p1, p2;
   double sigma_p = 0.0, sigma_c = 0.0;
