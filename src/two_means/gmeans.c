@@ -214,6 +214,9 @@ void projection(double *X, int p, int *ck, int nk, double *vec1, double *vec2, d
 
 boolean testCluster_ADtest(double *X, int p, int *ck, int nk, double *vec1, double *vec2, double *d, double cv)
 {
+  if (nk <= 5)
+    return false;
+
   int t;
   double *prj_x = (double *)malloc(sizeof(double) * nk);
 
