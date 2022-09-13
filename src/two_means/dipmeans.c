@@ -86,12 +86,13 @@ void dipmeans_sim(double *X, int *pn, int *pp, double *M, int *pK, int *C,
 
       tmp = testCluster_unimodality(D, nk, ck, a, vthd, debug);
 
+      if (debug) printf("\n");
+
       if (tmp > maxscore) {
         maxscore = tmp;
         tg = k;
       }
     }
-    if (debug) printf("\n");
 
     if (maxscore > 0.0) { // devide the target cluster into two new clusters
       k = tg;
