@@ -244,19 +244,27 @@ usmlsom <- function(data, xdim=8, ydim=6, topo="h", grid = somgrid(xdim,ydim,top
               silent = as.integer(silent))
 
     adjmatrix = matrix(res$adjmatrix,nrow=M,byrow=T)
+
+    lives <- adjmatrix[,1] != -1
+
+    nd <- sum(lives)
+
     codes <- res$codes
     dim(codes) <- c(M*K,p)
-    colnames(codes) <- colnames(init1)
-    unit.classif <- factor(res$classes+1,levels=1:M)
-    lives <- adjmatrix[,1] != -1
-    names(lives) <- 1:M
+
+    class_rename <- 1:nd
+    names(class_rename) <- which(lives)
+
+    classes <- as.vector(class_rename[as.character(res$classes+1)])
+
     logliks = res$logliks
-    nd <- sum(lives)
     changes <- matrix(res$changes[1:(ceiling(rlen*n/chgbyns)*(M-nd+1))], ncol=1)
+
     if (dtype == "multinom")
         df <- nd*(p-1)
     else
         df <- nd*K*p
+
     mdl <- -sum(logliks) + df/2 * log(n) + n*log(nd)
 
     structure(list(grid = grid, codes = codes, changes = changes, adjmatrix = adjmatrix, lives = lives, alpha = alpha, radius = radius, unit.classif=unit.classif, logliks = logliks, mdl=mdl, nd=nd, K=K, M=M, dtype=dtype),
