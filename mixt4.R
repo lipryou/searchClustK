@@ -109,6 +109,7 @@ mixtures4 <- function(X, Mmax, Mmin=1, cov_type = c("full", "diag"), init_type =
     }
 
     ## calculation posterior probabilities
+    likelihoods <- pmax(likelihoods, 1e-300)
     z <- likelihoods / rowSums(likelihoods)
 
     clusters <- apply(z, 1, which.max)
