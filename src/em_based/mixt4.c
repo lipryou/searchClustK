@@ -24,7 +24,7 @@ params_link params;
 
 void mixtures4(double *data, double *likelihoods, double *mus, double *covs, double *props, int *pcov_type,
                int *pn, int *pp, double *pdmover2, int *pM, int *pMmin, double *pth, int *pcountf, double *dl,
-               double *logliks, int *kappas, int *trans1, int *trans2, int *lives,
+               double *logliks, int *kappas, int *trans1, int *trans2, int *lives, double *pmindl,
                int *blives, double *bmus, double *bcovs, double *bprops, int *pitmax, int *psilent)
 {
   /* from R */
@@ -250,6 +250,8 @@ void mixtures4(double *data, double *likelihoods, double *mus, double *covs, dou
     if (countf >= (itmax-1))
       k_cont = 0;
   }
+
+  *pmindl = mindl;
 
   *pcountf = countf;
   free(weights);

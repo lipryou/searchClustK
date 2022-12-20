@@ -267,7 +267,7 @@ usmlsom <- function(data, xdim=8, ydim=6, topo="h", grid = somgrid(xdim,ydim,top
 
     mdl <- -sum(logliks) + df/2 * log(n) + n*log(nd)
 
-    structure(list(grid = grid, codes = codes, changes = changes, adjmatrix = adjmatrix, lives = lives, alpha = alpha, radius = radius, unit.classif=unit.classif, logliks = logliks, mdl=mdl, nd=nd, K=K, M=M, dtype=dtype),
+    structure(list(grid = grid, codes = codes, changes = changes, adjmatrix = adjmatrix, lives = lives, alpha = alpha, radius = radius, classes=classes, logliks = logliks, mdl=mdl, nd=nd, K=K, M=M, dtype=dtype),
               class = "usmlsom")
 }
 

@@ -1,6 +1,10 @@
-gmeans <- function(X, M=1, Mmax=20, alpha=0.01, debug=0) {
-    if (alpha < 0 | alpha > 1)
-        stop("alpha should be in [0, 1]")
+gmeans <- function(X, M=1, Mmax=20, cv=1.8692, debug=0) {
+    ## X: input matrix
+    ## M: start cluster number
+    ## Mmax: maximum number of clusters
+    ## cv: critical value
+    ## debug: debug flag
+
     if (is.vector(X)) {
         X <- matrix(X, length(X), 1)
         message("Input is one-dimensional. This algorithm is suitable for tasks where p>1.")
@@ -8,8 +12,6 @@ gmeans <- function(X, M=1, Mmax=20, alpha=0.01, debug=0) {
 
     n <- nrow(X)
     p <- ncol(X)
-
-    cv <- 1.8692
 
     centers <- matrix(0, Mmax, p)
 

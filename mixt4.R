@@ -1,10 +1,11 @@
-mixtures4 <- function(X, Mmax, Mmin=1, cov_type = c("full", "diag"),
+mixtures4 <- function(X, Mmax, Mmin=1, cov_type = c("full", "diag"), init_type = c("random", "kmeans"),
                       itmax=2000, th=1e-4, silent=0) {
 
     n <- nrow(X)
     p <- ncol(X)
 
     cov_type = match.arg(cov_type)
+    init_type = match.arg(init_type)
 
     ## initialization model parameters
 
@@ -12,7 +13,10 @@ mixtures4 <- function(X, Mmax, Mmin=1, cov_type = c("full", "diag"),
     props <- rep(1 / Mmax, Mmax)
 
     ## means: randomly chosen data points
-    mus <- X[sample(1:n, Mmax),]
+    if (init_type == "random")
+        mus <- X[sample(1:n, Mmax),]
+    else if (init_type == "kmeans")
+        mus <- kmeans(X, Mmax)$centers
 
     if (cov_type == "full") {
 
@@ -60,6 +64,7 @@ mixtures4 <- function(X, Mmax, Mmin=1, cov_type = c("full", "diag"),
               trans1 = integer(itmax),
               trans2 = integer(itmax),
               lives = as.integer(rep(1, Mmax)),
+              mindl = double(1),
               blives = as.integer(rep(1, Mmax)),
               bmus = double(length(mus)),
               bcovs = double(length(covs)),
@@ -108,7 +113,7 @@ mixtures4 <- function(X, Mmax, Mmin=1, cov_type = c("full", "diag"),
 
     clusters <- apply(z, 1, which.max)
 
-    list(M=M, z=z, props=props, mus=mus, covs=covs, clusters=clusters,
+    list(M=M, z=z, props=props, mus=mus, covs=covs, clusters=clusters, mindl=ret$mindl,
          dl=dl, logliks=logliks, kappas=kappas, trans1=trans1, trans2=trans2)
 }
 
