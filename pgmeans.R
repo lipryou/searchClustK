@@ -22,7 +22,7 @@ pgmeans <- function(X, M, Mmax=20, alpha=0.001, nprj=12, cov_type = c("full", "d
         covs <- array(diag(p), dim=c(p, p, Mmax))
     } else if (cov_type == "diag") {
         cov.type <- 1
-        covs <- matrix(1, Mmax, p)
+        covs <- matrix(1, p, Mmax)  ## NOTE: p x M matrix
     } else {
         stop("such `cov_type` does not exist.")
     }

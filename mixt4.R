@@ -36,7 +36,7 @@ mixtures4 <- function(X, Mmax, Mmin=1, cov_type = c("full", "diag"), init_type =
         cov.type <- 1
 
         gcov <- cov(X)
-        covs <- matrix(max(diag(gcov/10)), Mmax, p)
+        covs <- matrix(max(diag(gcov/10)), p, Mmax) ## NOTE: p x M matrix
     }
 
     likelihoods <- matrix(0, n, Mmax)
@@ -101,7 +101,7 @@ mixtures4 <- function(X, Mmax, Mmin=1, cov_type = c("full", "diag"), init_type =
             likelihoods[, m] <- props[m] * mclust::dmvnorm(X, mus[m, ], covs[,,m])
 
     } else if (cov_type == "diag") {
-        covs <- matrix(ret$bcovs, Mmax, p)
+        covs <- matrix(ret$bcovs, Mmax, p, byrow=T)
         covs <- covs[blives,, drop=F]
 
         for (m in 1:M)
