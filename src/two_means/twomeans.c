@@ -3,12 +3,15 @@
 void two_means(double *X, int p, int *ck, int nk, double *cnt1, double *cnt2, list ic1, list ic2)
 {
   double tmp, s1, s2;
-  int t, i, j, it, n1, n2;
+  int t, i, j, n1, n2;
+  int it = 0;
   double chngs[2];
 
-
   chngs[1] = 0.0;
-  for (it = 0; it < MAXIT; it++) {
+  //for (it = 0; it < MAXIT; it++) {
+  while(1) {
+    it++;
+
     chngs[0] = chngs[1];
 
     for (t = 0; t < nk; t++) {
@@ -34,6 +37,7 @@ void two_means(double *X, int p, int *ck, int nk, double *cnt1, double *cnt2, li
       }
     }
 
+    if (it == MAXIT) break;
     if (fabs(chngs[0] - chngs[1])/chngs[0] < EPS) break;
 
     for (j = 0; j < p; j++) {
